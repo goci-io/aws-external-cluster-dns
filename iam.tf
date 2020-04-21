@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "trust" {
 }
 
 resource "aws_iam_role" "external_dns" {
-  name               = local.iam_role_name_override
+  name               = local.iam_role_name
   tags               = module.iam_label.tags
   description        = "Grants permissions to external-dns to change records in the hosted zones on your behalf"
   assume_role_policy = data.aws_iam_policy_document.trust.json
