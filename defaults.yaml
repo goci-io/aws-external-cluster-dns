@@ -17,7 +17,7 @@ zoneIdFilters:
 - ${zone}
 %{ endfor ~}
 
-%{ if ~}
+%{ if set_iam_annotation ~}
 podAnnotations:
   iam.amazonaws.com/role: ${iam_role_name}
 %{ endif ~}

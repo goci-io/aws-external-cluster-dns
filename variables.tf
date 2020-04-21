@@ -87,7 +87,7 @@ variable "iam_role_trust_relations" {
 variable "apply_assume_role_config" {
   type        = bool
   default     = true
-  description = "Configures the AWS provider for external to assume the created IAM role. In case you use kiam or something similar you have to use the pod annotation instead"
+  description = "Configures the AWS provider for external dns to assume the created IAM role. In case you use kiam or something similar you have to use the pod annotation instead"
 }
 
 variable "apply_assume_role_annotation" {
