@@ -1,0 +1,40 @@
+txtPrefix: txt.
+txtOwnerId: ${owner_id}
+interval: 2m
+provider: aws
+policy: ${update_policy}
+sources:
+- ingress
+
+publishInternalServices: true
+domainFilters:
+%{ for domain in domains ~}
+- ${domain}
+%{ endfor ~}
+
+zoneIdFilters:
+%{ for zone in hosted_zone_ids ~}
+- ${zone}
+%{ endfor ~}
+
+aws:
+  region: ${aws_region}
+  assumeRoleArn: ${iam_role_arn}
+
+rbac:
+  create: true
+  pspEnabled: true
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    interval: 120s
+    scrapeTimeout: 120s
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 21M
+  limits:
+    cpu: 50m
+    memory: 86M
