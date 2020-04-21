@@ -20,6 +20,11 @@ variable "delimiter" {
   description = "Delimiter to be used between `namespace`, `stage`, `name` and `attributes`"
 }
 
+variable "region" {
+  type        = string
+  description = "Custom region name"
+}
+
 variable "attributes" {
   type        = list(string)
   default     = []
@@ -30,6 +35,12 @@ variable "tags" {
   type        = map
   default     = {}
   description = "Additional tags (e.g. map(`BusinessUnit`,`XYZ`)"
+}
+
+variable "k8s_namespace" {
+  type        = string
+  default     = "kube-system"
+  description = "The kubernetes namespace to deploy the helm release into"
 }
 
 variable "cluster_fqdn" {

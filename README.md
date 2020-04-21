@@ -12,6 +12,7 @@ module "external_dns" {
   source       = "git::https://github.com/goci-io/aws-external-cluster-dns.git?ref=tags/<latest-version>"
   namespace    = "goci"
   stage        = "corp"
+  region       = "eu1"
   aws_region   = "eu-central-1"
   cluster_fqdn = "corp.eu1.goci.io"
   domains      = ["services.corp.eu1.goci.io"]
