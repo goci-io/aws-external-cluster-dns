@@ -1,13 +1,12 @@
-
 locals {
-  pdb_content = templatefile("${path.module}/templates/pdb.yaml", { 
+  pdb_content = templatefile("${path.module}/templates/pdb.yaml", {
     name          = var.name
     k8s_namespace = var.k8s_namespace
-  }
+  })
 }
 
 resource "null_resource" "pdb" {
-  depends_on  = [null_resource.remove_pdb]
+  depends_on = [null_resource.remove_pdb]
 
   provisioner "local-exec" {
     command = "echo \"${self.triggers.content}\" | kubectl apply -f -"

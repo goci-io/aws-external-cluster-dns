@@ -15,13 +15,13 @@ variable "namespace" {
 }
 
 variable "delimiter" {
-  type        = "string"
+  type        = string
   default     = "-"
   description = "Delimiter to be used between `namespace`, `stage`, `name` and `attributes`"
 }
 
 variable "attributes" {
-  type        = "list"
+  type        = list(string)
   default     = []
   description = "Additional attributes (e.g. `1`)"
 }
@@ -61,7 +61,7 @@ variable "helm_values_root" {
 variable "iam_role_trust_relations" {
   type        = list(object({ type = string, identifiers = list(string) }))
   description = "The IAM trust relations for the role created for external-dns"
-  default     = [{
+  default = [{
     type        = "Service"
     identifiers = ["ec2.amazonaws.com"]
   }]
