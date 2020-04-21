@@ -107,3 +107,9 @@ variable "is_private_zone" {
   default     = false
   description = "Type of the hosted zones specified in domains"
 }
+
+variable "iam_role_name_override" {
+  type        = string
+  default     = ""
+  description = "Overrides the IAM role name to use for external-dns"
+}

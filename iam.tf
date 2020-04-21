@@ -8,6 +8,10 @@ module "iam_label" {
   name       = var.name
 }
 
+locals {
+  iam_role_name = var.iam_role_name_override == "" ? module.iam_label.id : var.iam_role_name_override
+}
+
 data "aws_iam_policy_document" "trust" {
   statement {
     effect  = "Allow"
@@ -25,7 +29,7 @@ data "aws_iam_policy_document" "trust" {
 }
 
 resource "aws_iam_role" "external_dns" {
-  name               = module.iam_label.id
+  name               = local.iam_role_name_override
   tags               = module.iam_label.tags
   description        = "Grants permissions to external-dns to change records in the hosted zones on your behalf"
   assume_role_policy = data.aws_iam_policy_document.trust.json
