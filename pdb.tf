@@ -6,8 +6,6 @@ locals {
 }
 
 resource "null_resource" "pdb" {
-  depends_on = [null_resource.remove_pdb]
-
   provisioner "local-exec" {
     command = "echo \"${self.triggers.content}\" | kubectl apply -f -"
   }
