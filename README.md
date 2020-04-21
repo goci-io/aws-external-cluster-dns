@@ -12,10 +12,13 @@ module "external_dns" {
   source       = "git::https://github.com/goci-io/aws-external-cluster-dns.git?ref=tags/<latest-version>"
   namespace    = "goci"
   stage        = "corp"
+  aws_region   = "eu-central-1"
   cluster_fqdn = "corp.eu1.goci.io"
   domains      = ["services.corp.eu1.goci.io"]
 }
 ```
+
+The default for `iam_role_trust_relations` allows `ec2.amazonaws.com` to assume the created role. You can change this by passing a list of `type` and `identifiers`.
 
 ### Migrate DNS records
 
