@@ -9,7 +9,7 @@ sources:
 publishInternalServices: true
 domainFilters:
 %{ for domain in domains ~}
-- ${domain}
+- "${domain}"
 %{ endfor ~}
 
 zoneIdFilters:
