@@ -17,9 +17,14 @@ zoneIdFilters:
 - ${zone}
 %{ endfor ~}
 
+%{ if ~}
+podAnnotations:
+  iam.amazonaws.com/role: ${iam_role_name}
+%{ endif ~}
+
 aws:
   region: ${aws_region}
-%{ if iam_role_arn != "" ~}
+%{ if set_assume_config ~}
   assumeRoleArn: ${iam_role_arn}
 %{ endif ~}
 

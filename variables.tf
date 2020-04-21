@@ -90,6 +90,12 @@ variable "apply_assume_role_config" {
   description = "Configures the AWS provider for external to assume the created IAM role. In case you use kiam or something similar you have to use the pod annotation instead"
 }
 
+variable "apply_assume_role_annotation" {
+  type        = bool
+  default     = false
+  description = "If set to true applies the kiam IAM role annotation on the pod template to assume the created role"
+}
+
 variable "update_records_policy" {
   type        = string
   default     = "sync"
