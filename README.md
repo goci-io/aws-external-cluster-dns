@@ -36,7 +36,6 @@ Owner-Validation Record value:
 "heritage=external-dns,external-dns/owner=<cluster_fqdn>/<k8s_namespace>"
 ```
 
-*root_domain is currently "fe.aws.ickdrasil.net"* 
 
 external-dns will update the existing record to point to our traffic load balancer dns.
 
