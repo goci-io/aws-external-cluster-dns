@@ -19,7 +19,9 @@ zoneIdFilters:
 
 aws:
   region: ${aws_region}
+%{ if iam_role_arn != "" ~}
   assumeRoleArn: ${iam_role_arn}
+%{ endif ~}
 
 rbac:
   create: true
