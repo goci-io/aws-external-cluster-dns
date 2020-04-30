@@ -2,7 +2,7 @@
 
 #### Maintained by [@goci-io/prp-terraform](https://github.com/orgs/goci-io/teams/prp-terraform)
 
-![Terraform Validate](https://github.com/goci-io/aws-external-cluster-dns/workflows/Terraform%20Validate/badge.svg)
+![terraform](https://github.com/goci-io/aws-external-cluster-dns/workflows/terraform/badge.svg?branch=master)
 
 This module provides [`external-dns`](https://github.com/helm/charts/tree/master/stable/external-dns) as preconfigured helm release. 
 Based on kubernetes Ingress objects Route53 records are created in their corresponding Route 53 Hosted Zone.
