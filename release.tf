@@ -1,12 +1,7 @@
-data "helm_repository" "bitnami" {
-  name = "bitnami"
-  url  = "https://charts.bitnami.com/bitnami"
-}
-
 resource "helm_release" "external_dns" {
   name       = var.name
   chart      = "external-dns"
-  repository = data.helm_repository.bitnami.metadata.0.name
+  repository = "https://charts.bitnami.com/bitnami"
   namespace  = var.k8s_namespace
   version    = var.helm_release_version
 
