@@ -17,9 +17,12 @@ zoneIdFilters:
 - ${zone}
 %{ endfor ~}
 
-%{ if set_iam_annotation ~}
+%{ if set_kiam_annotation ~}
 podAnnotations:
   iam.amazonaws.com/role: ${iam_role_arn}
+%{ if iam_external_id != "-" ~}
+  iam.amazonaws.com/external-id: ${iam_external_id}
+%{ endif ~}
 %{ endif ~}
 
 aws:

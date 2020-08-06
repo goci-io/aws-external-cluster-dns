@@ -1,7 +1,7 @@
-output "iam_role_name" {
-  value = aws_iam_role.external_dns.name
+output "iam_role_arn" {
+  value = local.iam_role_arn
 }
 
-output "iam_role_arn" {
-  value = aws_iam_role.external_dns.arn
+output "iam_role_external_id" {
+  value = local.iam_role_external_id
 }
