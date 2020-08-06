@@ -1,5 +1,5 @@
 module "iam_role" {
-  source           = "git::https://github.com/goci-io/aws-iam-assumable-role.git?ref=tags/0.1.0"
+  source           = "git::https://github.com/goci-io/aws-iam-assumable-role.git?ref=tags/0.1.1"
   enabled          = var.create_iam_role
   namespace        = var.namespace
   stage            = var.stage
