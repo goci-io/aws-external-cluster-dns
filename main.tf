@@ -4,14 +4,7 @@ terraform {
   required_providers {
     null = "~> 2.1"
     helm = "~> 1.1"
-  }
-}
-
-provider "aws" {
-  version = "~> 2.50"
-
-  assume_role {
-    role_arn = var.aws_assume_role_arn
+    aws  = "~> 2.50"
   }
 }
 
