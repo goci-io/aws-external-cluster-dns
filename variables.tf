@@ -69,25 +69,52 @@ variable "helm_values_root" {
   description = "Path to the directory containing values.yaml for helm to overwrite any defaults"
 }
 
-variable "iam_role_trust_relations" {
-  type        = list(object({ type = string, identifiers = list(string) }))
-  description = "The IAM trust relations for the role created for external-dns"
-  default = [{
-    type        = "Service"
-    identifiers = ["ec2.amazonaws.com"]
-  }]
+variable "create_iam_role" {
+  type        = bool
+  default     = true
+  description = "Creates a new dedicated IAM Role for External-DNS"
+}
+
+variable "iam_role_arn" {
+  type        = string
+  default     = ""
+  description = "An existing IAM Role Arn to use instead of creating a new one"
+}
+
+variable "iam_role_external_id" {
+  type        = string
+  default     = ""
+  description = "The External ID to be used when assuming the specified iam_role_arn"
+}
+
+variable "iam_role_trusted_services" {
+  type        = list(string)
+  description = "The IAM Services Trust Relations for the newly created External-DNS Role"
+  default     = []
+}
+
+variable "iam_role_trusted_arns" {
+  type        = list(string)
+  description = "Trusted ARNs for the newly created External-DNS Role"
+  default     = []
+}
+
+variable "iam_role_create_external_id" {
+  type        = bool
+  default     = false
+  description = "When set to True creates a random UUID as External ID for the IAM Trust Relation Policy"
 }
 
 variable "apply_assume_role_config" {
   type        = bool
   default     = true
-  description = "Configures the AWS provider for external dns to assume the created IAM role. In case you use kiam or something similar you have to use the pod annotation instead"
+  description = "Configures the AWS provider for external dns to assume an IAM role. In case you use KIAM use configure_kiam instead."
 }
 
-variable "apply_assume_role_annotation" {
+variable "configure_kiam" {
   type        = bool
   default     = false
-  description = "If set to true applies the kiam IAM role annotation on the pod template to assume the created role"
+  description = "If set to true applies the KIAM IAM role annotation on the Pod Template"
 }
 
 variable "update_records_policy" {
@@ -100,10 +127,4 @@ variable "is_private_zone" {
   type        = bool
   default     = false
   description = "Type of the hosted zones specified in domains"
-}
-
-variable "iam_role_name_override" {
-  type        = string
-  default     = ""
-  description = "Overrides the IAM role name to use for external-dns"
 }
