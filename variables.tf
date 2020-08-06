@@ -52,12 +52,6 @@ variable "aws_region" {
   description = "The region external-dns is available in"
 }
 
-variable "aws_assume_role_arn" {
-  type        = string
-  default     = ""
-  description = "Role to assume for the AWS terraform provider"
-}
-
 variable "domains" {
   type        = list(string)
   description = "A list of domains external-dns deployment can handle for you"
