@@ -16,7 +16,7 @@ module "iam_role" {
         "arn:aws:route53:::hostedzone/%s",
         data.aws_route53_zone.targets.*.zone_id
       )
-    }
+    },
     {
       resources = ["*"]
       effect    = "Allow"
