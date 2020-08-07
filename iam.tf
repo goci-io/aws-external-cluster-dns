@@ -17,10 +17,30 @@ module "iam_role" {
         data.aws_route53_zone.targets.*.zone_id
       )
     },
-    {
-      resources = ["*"]
-      effect    = "Allow"
-      actions   = ["route53:ListHostedZones"]
-    }
   ]
+}
+
+locals {
+  role_parts = split("/", var.iam_role_arn)
+  role_name  = var.iam_role_arn == "" ? "" : join("", slice(local.role_parts, length(local.role_parts) - 1, length(local.role_parts)))
+}
+
+data "aws_iam_policy_document" "zone_access" {
+  count = var.iam_attach_policy ? 1 : 0
+
+  statement {
+    effect  = "Allow"
+    actions = ["route53:ChangeResourceRecordSets", "route53:ListResourceRecordSets"]
+    resources = formatlist(
+      "arn:aws:route53:::hostedzone/%s",
+      data.aws_route53_zone.targets.*.zone_id
+    )
+  }
+}
+
+resource "aws_iam_role_policy" "zone_access" {
+  count  = var.iam_attach_policy ? 1 : 0
+  name   = "external-dns-update-records"
+  role   = local.role_name
+  policy = join("", data.aws_iam_policy_document.zone_access.*.json)
 }

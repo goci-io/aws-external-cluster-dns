@@ -75,6 +75,12 @@ variable "create_iam_role" {
   description = "Creates a new dedicated IAM Role for External-DNS"
 }
 
+variable "iam_attach_policy" {
+  type        = bool
+  default     = false
+  description = "When using an existing Role ARN we can attach the required Policy to grant External DNS Permissions"
+}
+
 variable "iam_role_arn" {
   type        = string
   default     = ""
