@@ -17,6 +17,11 @@ module "iam_role" {
         data.aws_route53_zone.targets.*.zone_id
       )
     },
+    {
+      effect    = "Allow"
+      resources = ["*"]
+      actions   = ["route53:ListHostedZones"]
+    },
   ]
 }
 
@@ -29,12 +34,20 @@ data "aws_iam_policy_document" "zone_access" {
   count = var.iam_attach_policy ? 1 : 0
 
   statement {
+    sid     = "AllowChangingRecordsInZones"
     effect  = "Allow"
     actions = ["route53:ChangeResourceRecordSets", "route53:ListResourceRecordSets"]
     resources = formatlist(
       "arn:aws:route53:::hostedzone/%s",
       data.aws_route53_zone.targets.*.zone_id
     )
+  }
+
+  statement {
+    sid       = "AllowListingZones"
+    effect    = "Allow"
+    resources = ["*"]
+    actions   = ["route53:ListHostedZones"]
   }
 }
 
