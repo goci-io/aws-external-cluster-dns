@@ -24,3 +24,27 @@ module "iam_role" {
     }
   ]
 }
+
+resource "aws_iam_role_policy" "zone_access" {
+  count = var.iam_attach_policy ? 1 : 0
+  name  = module.iam_role.role_id
+  role  = module.iam_role.role_id
+  policy = <<-EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": [
+          "route53:ChangeResourceRecordSets",
+          "route53:ListResourceRecordSets"
+        ],
+        "Effect": "Allow",
+        "Resource": ${formatlist(
+  "arn:aws:route53:::hostedzone/%s",
+  data.aws_route53_zone.targets.*.zone_id
+)}
+      }
+    ]
+  }
+EOF
+}
