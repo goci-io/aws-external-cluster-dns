@@ -22,7 +22,7 @@ module "iam_role" {
 
 locals {
   role_parts = split("/", var.iam_role_arn)
-  role_name  = var.iam_role_arn == "" ? "" : slice(local.role_parts, length(local.role_parts) - 1, length(local.role_parts))
+  role_name  = var.iam_role_arn == "" ? "" : join("", slice(local.role_parts, length(local.role_parts) - 1, length(local.role_parts)))
 }
 
 data "aws_iam_policy_document" "zone_access" {
