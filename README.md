@@ -23,7 +23,20 @@ module "external_dns" {
 }
 ```
 
-The default for `iam_role_trust_relations` allows `ec2.amazonaws.com` to assume the created role. You can change this by passing a list of `type` and `identifiers`.
+### IAM Role
+
+To create an IAM Role or use an existing Role for External DNS you can specify the following variables:
+
+- `create_iam_role` Creates a dedicated IAM Role
+- `iam_role_trusted_arns` Trusted IAM ARNs
+- `iam_role_trusted_services` Trusted AWS Services
+- `iam_role_create_external_id` Allows sts:Assume only with External ID set
+
+Using an existing Role:
+
+- `iam_role_arn` ARN of existing IAM Role
+- `iam_attach_policy` Attaches required Permissions to the Role
+- `iam_role_external_id` External ID required to assume specified iam_role_arn
 
 ### Migrate DNS records
 
