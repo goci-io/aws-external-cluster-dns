@@ -17,18 +17,18 @@ module "iam_role" {
         data.aws_route53_zone.targets.*.zone_id
       )
     },
-    {
-      resources = ["*"]
-      effect    = "Allow"
-      actions   = ["route53:ListHostedZones"]
-    }
   ]
+}
+
+locals {
+  role_parts = split("/", var.iam_role_arn)
+  role_name  = var.iam_role_arn == "" ? "" : slice(local.role_parts, length(local.role_parts) - 1, length(local.role_parts))
 }
 
 resource "aws_iam_role_policy" "zone_access" {
   count = var.iam_attach_policy ? 1 : 0
-  name  = module.iam_role.role_id
-  role  = module.iam_role.role_id
+  name  = "external-dns-update-records"
+  role  = local.role_name
   policy = <<-EOF
   {
     "Version": "2012-10-17",
