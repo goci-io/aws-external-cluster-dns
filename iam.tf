@@ -29,8 +29,8 @@ data "aws_iam_policy_document" "zone_access" {
   count = var.iam_attach_policy ? 1 : 0
 
   statement {
-    effect    = "Allow"
-    actions   = ["route53:ChangeResourceRecordSets", "route53:ListResourceRecordSets"]
+    effect  = "Allow"
+    actions = ["route53:ChangeResourceRecordSets", "route53:ListResourceRecordSets"]
     resources = formatlist(
       "arn:aws:route53:::hostedzone/%s",
       data.aws_route53_zone.targets.*.zone_id
