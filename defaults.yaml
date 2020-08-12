@@ -3,6 +3,7 @@ txtOwnerId: ${owner_id}
 interval: 2m
 provider: aws
 policy: ${update_policy}
+replicas: ${replicas}
 sources:
 - ingress
 

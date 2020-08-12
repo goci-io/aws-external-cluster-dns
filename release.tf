@@ -14,6 +14,7 @@ resource "helm_release" "external_dns" {
   values = [
     templatefile("${path.module}/defaults.yaml", {
       domains             = var.domains
+      replicas            = var.replicas
       aws_region          = var.aws_region
       update_policy       = var.update_records_policy
       iam_role_arn        = local.iam_role_arn
