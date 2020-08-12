@@ -28,7 +28,7 @@ podAnnotations:
 
 aws:
   region: ${aws_region}
-%{ if set_assume_config ~}
+%{ if set_assume_config && !set_kiam_annotation ~}
   assumeRoleArn: ${iam_role_arn}
 %{ endif ~}
 
