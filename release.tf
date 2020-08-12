@@ -23,6 +23,6 @@ resource "helm_release" "external_dns" {
       hosted_zone_ids     = data.aws_route53_zone.targets.*.zone_id
       owner_id            = join("/", [var.cluster_fqdn, var.k8s_namespace])
     }),
-    fileexists(local.overwrite_file_path) ? file(local.overwrite_file_path) : {},
+    fileexists(local.overwrite_file_path) ? file(local.overwrite_file_path) : "",
   ]
 }
