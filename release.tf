@@ -28,6 +28,8 @@ resource "helm_release" "external_dns" {
 }
 
 resource "kubernetes_pod_disruption_budget" "allow_unavailable" {
+  count = var.replicas == 1 ? 1 : 0
+
   metadata {
     name      = var.name
     namespace = var.k8s_namespace

@@ -134,3 +134,9 @@ variable "is_private_zone" {
   default     = false
   description = "Type of the hosted zones specified in domains"
 }
+
+variable "replicas" {
+  type        = number
+  default     = 1
+  description = "Amount of Replicas for External-DNS. When set to 1 we also create a PodDisruptionBudget"
+}
