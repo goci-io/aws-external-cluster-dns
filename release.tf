@@ -1,4 +1,5 @@
 locals {
+  overwrite_file_path  = "${var.helm_values_root}/values.yaml"
   iam_role_arn         = coalesce(module.iam_role.role_arn, var.iam_role_arn)
   iam_role_external_id = coalesce(module.iam_role.external_id, var.iam_role_external_id, "-")
 }
@@ -22,6 +23,6 @@ resource "helm_release" "external_dns" {
       hosted_zone_ids     = data.aws_route53_zone.targets.*.zone_id
       owner_id            = join("/", [var.cluster_fqdn, var.k8s_namespace])
     }),
-    file("${var.helm_values_root}/values.yaml"),
+    fileexists(local.overwrite_file_path) ? file(local.overwrite_file_path) : {},
   ]
 }
