@@ -10,6 +10,6 @@ terraform {
 
 data "aws_route53_zone" "targets" {
   count        = length(var.domains)
-  name         = format("%s.", replace(var.domains[count.index], "/^\\./", ""))
+  name         = format("%s.", trim(var.domains[count.index], "."))
   private_zone = var.is_private_zone
 }
