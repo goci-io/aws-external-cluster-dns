@@ -26,3 +26,21 @@ resource "helm_release" "external_dns" {
     fileexists(local.overwrite_file_path) ? file(local.overwrite_file_path) : "",
   ]
 }
+
+resource "kubernetes_pod_disruption_budget" "allow_unavailable" {
+  metadata {
+    name      = var.name
+    namespace = var.k8s_namespace
+  }
+
+  spec {
+    max_unavailable = 1
+
+    selector {
+      match_labels = {
+        app     = "external-dns"
+        release = var.name
+      }
+    }
+  }
+}
