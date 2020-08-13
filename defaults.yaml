@@ -18,6 +18,10 @@ zoneIdFilters:
 - ${zone}
 %{ endfor ~}
 
+%{ if namespace_scoped ~}
+namespace: ${k8s_namespace}
+%{ endif ~}
+
 %{ if set_kiam_annotation ~}
 podAnnotations:
   iam.amazonaws.com/role: ${iam_role_arn}

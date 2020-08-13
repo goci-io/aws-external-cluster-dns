@@ -146,3 +146,9 @@ variable "psp_enabled" {
   default     = false
   description = "When enabled creates a new PodSecurityPolicy and ClusterRole for External DNS. Its recommended to avoid creating a PSP per App."
 }
+
+variable "namespace_scoped" {
+  type        = bool
+  default     = false
+  description = "Restricts External DNS Access to the Namespace the Release will be deployed to"
+}

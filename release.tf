@@ -17,6 +17,8 @@ resource "helm_release" "external_dns" {
       replicas            = var.replicas
       aws_region          = var.aws_region
       psp_enabled         = var.psp_enabled
+      k8s_namespace       = var.k8s_namespace
+      namespace_scoped    = var.namespace_scoped
       update_policy       = var.update_records_policy
       iam_role_arn        = local.iam_role_arn
       iam_external_id     = local.iam_role_external_id
