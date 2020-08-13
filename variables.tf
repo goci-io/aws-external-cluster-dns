@@ -140,3 +140,9 @@ variable "replicas" {
   default     = 1
   description = "Amount of Replicas for External-DNS. When set to 1 we also create a PodDisruptionBudget"
 }
+
+variable "psp_enabled" {
+  type        = bool
+  default     = false
+  description = "When enabled creates a new PodSecurityPolicy and ClusterRole for External DNS. Its recommended to avoid creating a PSP per App."
+}
