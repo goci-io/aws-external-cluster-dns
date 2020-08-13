@@ -34,7 +34,7 @@ aws:
 
 rbac:
   create: true
-  pspEnabled: true
+  pspEnabled: ${psp_enabled}
 
 metrics:
   enabled: true
