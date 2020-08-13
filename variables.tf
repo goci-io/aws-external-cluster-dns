@@ -59,7 +59,7 @@ variable "domains" {
 
 variable "helm_release_version" {
   type        = string
-  default     = "2.21.1"
+  default     = "3.4.0"
   description = "The version of the helm chart to use"
 }
 
