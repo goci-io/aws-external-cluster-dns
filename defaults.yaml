@@ -39,6 +39,7 @@ aws:
 rbac:
   create: true
   pspEnabled: ${psp_enabled}
+  clusterRole: ${namespace_scoped ? false : true}
 
 metrics:
   enabled: true
