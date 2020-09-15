@@ -8,8 +8,12 @@ terraform {
   }
 }
 
+locals {
+  domains = compact(var.domains)
+}
+
 data "aws_route53_zone" "targets" {
-  count        = length(var.domains)
-  name         = format("%s.", trim(var.domains[count.index], "."))
+  count        = length(local.domains)
+  name         = format("%s.", trim(local.domains[count.index], "."))
   private_zone = var.is_private_zone
 }
