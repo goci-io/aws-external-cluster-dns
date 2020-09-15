@@ -7,7 +7,7 @@ locals {
 resource "helm_release" "external_dns" {
   name       = var.name
   chart      = "external-dns"
-  repository = "https://etwillbefine.github.io/charts-1/"
+  repository = "https://charts.bitnami.com/bitnami"
   namespace  = var.k8s_namespace
   version    = var.helm_release_version
 
